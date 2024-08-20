@@ -6,7 +6,6 @@ use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Services\AuthService;
-use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -34,13 +33,13 @@ class AuthController extends Controller
 
         if (!$loginData) {
             return response()->json([
-                'message' => 'Unauthorized.',
+                'message' => 'Unauthorized.'
             ], 401);
         }
 
         return response()->json([
             'user' => new UserResource($loginData['user']),
-            'token' => $loginData['token'],
+            'token' => $loginData['token']
         ]);
     }
 
@@ -58,7 +57,7 @@ class AuthController extends Controller
         $this->authService->logout();
 
         return response()->json([
-            'message' => 'Successfully logged out.',
+            'message' => 'Successfully logged out.'
         ]);
     }
 
@@ -68,7 +67,7 @@ class AuthController extends Controller
 
         return response()->json([
             'user' => new UserResource($result['user']),
-            'token' => $result['token'],
+            'token' => $result['token']
         ]);
     }
 }
