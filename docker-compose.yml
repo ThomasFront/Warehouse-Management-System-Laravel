@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+    db:
+        image: mysql:8.0
+        container_name: mysql_db
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: wms
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - mynetwork
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        restart: unless-stopped
+        ports:
+            - "8081:80"
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: password
+        networks:
+            - mynetwork
+
+networks:
+    mynetwork:
+        driver: bridge
+
+volumes:
+    dbdata:
