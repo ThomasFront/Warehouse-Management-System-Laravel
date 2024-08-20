@@ -5,22 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\UserResource;
+use App\Http\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function register(RegisterUserRequest $request){
+    protected AuthService $authService;
 
-        $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
 
-        $token = Auth::login($user);
+    public function register(RegisterUserRequest $request)
+    {
+        $token = $this->authService->register($request->validated());
 
         return response()->json([
             'token' => $token,
@@ -31,23 +30,23 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        $token = Auth::attempt($credentials);
-        if (!$token) {
+        $loginData = $this->authService->login($credentials);
+
+        if (!$loginData) {
             return response()->json([
                 'message' => 'Unauthorized.',
             ], 401);
         }
 
-        $user = Auth::user();
         return response()->json([
-            'user' => new UserResource($user),
-            'token' => $token,
+            'user' => new UserResource($loginData['user']),
+            'token' => $loginData['token'],
         ]);
     }
 
     public function me()
     {
-        $user = Auth::user();
+        $user = $this->authService->me();
 
         return response()->json([
             'user' => new UserResource($user)
@@ -56,7 +55,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        $this->authService->logout();
 
         return response()->json([
             'message' => 'Successfully logged out.',
@@ -65,10 +64,11 @@ class AuthController extends Controller
 
     public function refresh()
     {
+        $result = $this->authService->refreshToken();
+
         return response()->json([
-            'user' => new UserResource(Auth::user()),
-            'token' => Auth::refresh(),
+            'user' => new UserResource($result['user']),
+            'token' => $result['token'],
         ]);
     }
-
 }
