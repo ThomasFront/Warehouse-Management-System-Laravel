@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'middleware' => 'api',
     'prefix' => 'auth',
 ], function () {
     Route::post('register', [AuthController::class, 'register']);
@@ -13,3 +13,5 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh'])->middleware('auth:api');
     Route::get('me', [AuthController::class, 'me'])->middleware('auth:api');
 });
+
+Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');
