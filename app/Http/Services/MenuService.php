@@ -8,13 +8,13 @@ class MenuService
 {
     public function getMenuBasedOnRole()
     {
-//        $isAdmin = Auth::user()->isAdmin();
+        $isAdmin = Auth::user()->isAdmin();
 
         $menu = $this->getDefaultMenu();
 
-//        if ($isAdmin) {
-//            $this->addAdminLinks($menu);
-//        }
+        if ($isAdmin) {
+            $this->addAdminLinks($menu);
+        }
 
         return $menu;
     }
