@@ -10,7 +10,7 @@ class CategoryService
 {
     public function getCategories()
     {
-        return Category::all();
+        return Category::paginate(10);
     }
 
     public function storeCategory(StoreCategoryRequest $data)
