@@ -29,10 +29,7 @@ class AuthService
             return null;
         }
 
-        $user = Auth::user();
-
         return [
-            'user' => $user,
             'token' => $token
         ];
     }
