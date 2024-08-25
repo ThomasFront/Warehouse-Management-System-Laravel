@@ -99,7 +99,7 @@ class MenuService
                 ],
                 [
                     'id' => 15,
-                    'name' => 'User management',
+                    'name' => 'Users',
                     'sublinks' => [
                         [
                             'id' => 16,
