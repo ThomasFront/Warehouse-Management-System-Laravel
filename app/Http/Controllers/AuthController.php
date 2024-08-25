@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginUserRequest;
 use App\Http\Requests\RegisterUserRequest;
 use App\Http\Resources\UserResource;
+use App\Http\Responses\ApiResponse;
 use App\Http\Services\AuthService;
 
 class AuthController extends Controller
@@ -32,25 +33,17 @@ class AuthController extends Controller
         $loginData = $this->authService->login($credentials);
 
         if (!$loginData) {
-            return response()->json([
-                'message' => 'Unauthorized.'
-            ], 401);
+            return ApiResponse::error(['message' => 'Unauthorized.'], 401);
         }
 
-        return response()->json([
-            'data' => [
-                'token' => $loginData['token']
-            ]
-        ]);
+        return ApiResponse::success(['token' => $loginData['token']]);
     }
 
     public function me()
     {
         $user = $this->authService->me();
 
-        return response()->json([
-            'user' => new UserResource($user)
-        ]);
+        return ApiResponse::success(['user' => new UserResource($user)]);
     }
 
     public function logout()

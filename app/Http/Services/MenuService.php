@@ -84,7 +84,6 @@ class MenuService
                 [
                     'id' => 12,
                     'name' => 'Messages',
-                    'url' => '/messages',
                     'sublinks' => [
                         [
                             'id' => 13,
