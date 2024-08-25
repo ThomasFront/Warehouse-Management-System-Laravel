@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Resources\CategoryCollection;
 use App\Http\Resources\CategoryResource;
+use App\Http\Responses\ApiResponse;
 use App\Http\Services\CategoryService;
 use App\Models\Category;
 
@@ -35,7 +36,7 @@ class CategoryController extends Controller
     {
         $createdCategory = $this->categoryService->storeCategory($request);
 
-        return response()->json(new CategoryResource($createdCategory), 201);
+        return ApiResponse::success(["category" => new CategoryResource($createdCategory)], 201);
     }
 
     /**
