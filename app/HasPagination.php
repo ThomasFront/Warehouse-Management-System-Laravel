@@ -16,9 +16,9 @@ trait HasPagination
     {
         return [
             'total' => $paginator->total(),
-            'per_page' => $paginator->perPage(),
-            'current_page' => $paginator->currentPage(),
-            'last_page' => $paginator->lastPage(),
+            'perPage' => $paginator->perPage(),
+            'currentPage' => $paginator->currentPage(),
+            'lastPage' => $paginator->lastPage(),
             'from' => $paginator->firstItem(),
             'to' => $paginator->lastItem(),
         ];
