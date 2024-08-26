@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
         $updatedCategory = $this->categoryService->updateCategory($request, $category);
 
-        return response()->json(new CategoryResource($updatedCategory));
+        return ApiResponse::success(["category" => new CategoryResource($updatedCategory)]);
     }
 
     /**

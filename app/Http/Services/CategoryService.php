@@ -10,7 +10,12 @@ class CategoryService
 {
     public function getCategories()
     {
-        return Category::paginate(10);
+        $perPage = config('pagination.per_page');
+
+        return Category
+            ::orderBy('updated_at', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate($perPage);
     }
 
     public function storeCategory(StoreCategoryRequest $data)
