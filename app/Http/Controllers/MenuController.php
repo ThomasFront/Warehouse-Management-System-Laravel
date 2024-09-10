@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\ApiResponse;
 use App\Http\Services\MenuService;
 class MenuController extends Controller
 {
@@ -14,6 +15,7 @@ class MenuController extends Controller
     public function index()
     {
         $menu = $this->menuService->getMenuBasedOnRole();
-        return response()->json($menu);
+
+        return ApiResponse::success(['menu' => $menu]);
     }
 }

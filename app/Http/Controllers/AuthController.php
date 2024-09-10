@@ -21,9 +21,7 @@ class AuthController extends Controller
     {
         $token = $this->authService->register($request->validated());
 
-        return response()->json([
-            'token' => $token,
-        ], 201);
+        return ApiResponse::success(['token' => $token], 201);
     }
 
     public function login(LoginUserRequest $request)
@@ -50,16 +48,14 @@ class AuthController extends Controller
     {
         $this->authService->logout();
 
-        return response()->json([
-            'message' => 'Successfully logged out.'
-        ]);
+        return ApiResponse::success(['message' => 'Successfully logged out.']);
     }
 
     public function refresh()
     {
         $result = $this->authService->refreshToken();
 
-        return response()->json([
+        return ApiResponse::success([
             'user' => new UserResource($result['user']),
             'token' => $result['token']
         ]);

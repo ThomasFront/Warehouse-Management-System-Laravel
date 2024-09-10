@@ -13,6 +13,25 @@ class CategoryService
         $query = Category::orderBy('updated_at', 'desc')
             ->orderBy($sortField, $sortOrder);
 
+        $this->applyFilters($query, $filterField, $filterOperator, $filterValue);
+
+        return $query->paginate($pageSize);
+    }
+
+    public function storeCategory(StoreCategoryRequest $data)
+    {
+        return Category::create($data->all());
+    }
+
+    public function updateCategory(UpdateCategoryRequest $request, Category $category): Category
+    {
+        $category->update($request->validated());
+
+        return $category;
+    }
+
+    public function applyFilters($query, $filterField, $filterOperator, $filterValue)
+    {
         if ($filterField && $filterOperator && $filterValue) {
             switch ($filterOperator) {
                 case 'contains':
@@ -42,19 +61,5 @@ class CategoryService
                     break;
             }
         }
-
-        return $query->paginate($pageSize);
-    }
-
-    public function storeCategory(StoreCategoryRequest $data)
-    {
-        return Category::create($data->all());
-    }
-
-    public function updateCategory(UpdateCategoryRequest $request, Category $category): Category
-    {
-        $category->update($request->validated());
-
-        return $category;
     }
 }

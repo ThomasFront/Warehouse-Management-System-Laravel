@@ -53,7 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return response()->json(new CategoryResource($category));
+        return ApiResponse::success(['category' => new CategoryResource($category)]);
     }
 
     /**
