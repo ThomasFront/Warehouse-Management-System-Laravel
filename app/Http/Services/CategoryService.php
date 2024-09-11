@@ -8,12 +8,17 @@ use App\Models\Category;
 
 class CategoryService
 {
+    protected FilterService $filterService;
+    public function __construct(FilterService $filterService)
+    {
+        $this->filterService = $filterService;
+    }
     public function getCategories($pageSize, $sortField, $sortOrder, $filterField, $filterValue, $filterOperator)
     {
         $query = Category::orderBy('updated_at', 'desc')
             ->orderBy($sortField, $sortOrder);
 
-        $this->applyFilters($query, $filterField, $filterOperator, $filterValue);
+        $this->filterService->applyFilters($query, $filterField, $filterOperator, $filterValue);
 
         return $query->paginate($pageSize);
     }
@@ -30,36 +35,8 @@ class CategoryService
         return $category;
     }
 
-    public function applyFilters($query, $filterField, $filterOperator, $filterValue)
+    public function deleteCategory(Category $category)
     {
-        if ($filterField && $filterOperator && $filterValue) {
-            switch ($filterOperator) {
-                case 'contains':
-                    $query->where($filterField, 'like', "%$filterValue%");
-                    break;
-                case 'equals':
-                    $query->where($filterField, $filterValue);
-                    break;
-                case 'startsWith':
-                    $query->where($filterField, 'like', "$filterValue%");
-                    break;
-                case 'endsWith':
-                    $query->where($filterField, 'like', "%$filterValue");
-                    break;
-                case 'isEmpty':
-                    $query->whereNull($filterField);
-                    break;
-                case 'isNotEmpty':
-                    $query->whereNotNull($filterField);
-                    break;
-                case 'isAnyOf':
-                    if (is_array($filterValue)) {
-                        $query->whereIn($filterField, $filterValue);
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
+        $category->delete();
     }
 }

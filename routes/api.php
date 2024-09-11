@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,13 @@ Route::group([
     Route::get('{category}', [CategoryController::class, 'show'])->middleware('auth:api');
     Route::delete('{category}', [CategoryController::class, 'destroy'])->middleware('auth:api');
     Route::patch('{category}', [CategoryController::class, 'update'])->middleware('auth:api');
+});
+
+Route::group([
+    'prefix' => 'users'
+], function() {
+    Route::get('', [UserController::class, 'index'])->middleware('auth:api');
+    Route::delete('{user}', [UserController::class, 'destroy'])->middleware('auth:api', CheckAdminRole::class);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');

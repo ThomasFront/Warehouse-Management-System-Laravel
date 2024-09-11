@@ -11,7 +11,7 @@ use App\Http\Services\CategoryService;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     protected CategoryService $categoryService;
 
@@ -25,15 +25,16 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $pageSize = $request->input('pageSize', 25);
-        $sortField = $request->input('sortField', 'created_at');
-        $sortOrder = $request->input('sortOrder', 'asc');
+        $params = $this->getPaginationAndFilterParams($request);
 
-        $filterField = $request->input('filterField');
-        $filterValue = $request->input('filterValue');
-        $filterOperator = $request->input('filterOperator');
-
-        $categories = $this->categoryService->getCategories($pageSize, $sortField, $sortOrder, $filterField, $filterValue, $filterOperator);
+        $categories = $this->categoryService->getCategories(
+            $params['pageSize'],
+            $params['sortField'],
+            $params['sortOrder'],
+            $params['filterField'],
+            $params['filterValue'],
+            $params['filterOperator']
+        );
 
         return response()->json(new CategoryCollection($categories));
     }
@@ -71,7 +72,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
+        $this->categoryService->deleteCategory($category);
 
         return ApiResponse::success(['message' => 'Category deleted successfully.']);
     }
