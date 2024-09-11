@@ -9,16 +9,14 @@ use Illuminate\Support\Facades\Hash;
 class AuthService
 {
 
-    public function register(array $data): string
+    public function register(array $data)
     {
-        $user = User::create([
+        User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-
-        return Auth::login($user);
     }
 
     public function login(array $credentials): ?array

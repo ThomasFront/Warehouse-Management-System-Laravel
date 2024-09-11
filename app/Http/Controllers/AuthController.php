@@ -19,9 +19,9 @@ class AuthController extends Controller
 
     public function register(RegisterUserRequest $request)
     {
-        $token = $this->authService->register($request->validated());
+        $this->authService->register($request->validated());
 
-        return ApiResponse::success(['token' => $token], 201);
+        return ApiResponse::success(['message' => 'User has been registered'], 201);
     }
 
     public function login(LoginUserRequest $request)
