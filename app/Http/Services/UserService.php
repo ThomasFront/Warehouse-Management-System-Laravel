@@ -2,7 +2,9 @@
 
 namespace App\Http\Services;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Http\Responses\ApiResponse;
 
@@ -40,5 +42,18 @@ class UserService
 
         $user->delete();
         return ApiResponse::success(['message' => 'User deleted successfully.']);
+    }
+
+    public function updateUser(UpdateUserRequest $request, User $user): User
+    {
+        $validatedData = $request->validated();
+
+        if (isset($validatedData['password'])) {
+            $validatedData['password'] = Hash::make($validatedData['password']);
+        }
+
+        $user->update($validatedData);
+
+        return $user;
     }
 }

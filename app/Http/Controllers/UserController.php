@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
 use App\Http\Services\UserService;
 use App\Models\User;
@@ -42,5 +44,15 @@ class UserController extends BaseController
     public function destroy(User $user)
     {
         return $this->userService->deleteUser($user);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateUserRequest $request, User $user)
+    {
+        $updatedUser = $this->userService->updateUser($request, $user);
+
+        return ApiResponse::success(["user" => new UserResource($updatedUser)]);
     }
 }
