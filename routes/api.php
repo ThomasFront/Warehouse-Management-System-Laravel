@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
+use App\Http\Middleware\CheckCurrentUser;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -31,8 +32,10 @@ Route::group([
     'prefix' => 'users'
 ], function() {
     Route::get('', [UserController::class, 'index'])->middleware('auth:api');
+    Route::get('{user}', [UserController::class, 'show'])->middleware('auth:api');
     Route::delete('{user}', [UserController::class, 'destroy'])->middleware('auth:api', CheckAdminRole::class);
     Route::patch('{user}', [UserController::class, 'update'])->middleware('auth:api', CheckAdminRole::class);
+    Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware('auth:api', CheckCurrentUser::class);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Services;
 
+use App\Http\Requests\EditUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -55,5 +56,12 @@ class UserService
         $user->update($validatedData);
 
         return $user;
+    }
+
+    public function editProfile(EditUserProfileRequest $request, User $user)
+    {
+        $validatedData = $request->validated();
+
+        $user->update($validatedData);
     }
 }

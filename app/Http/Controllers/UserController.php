@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
@@ -39,6 +40,14 @@ class UserController extends BaseController
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(User $user)
+    {
+        return ApiResponse::success(['user' => new UserResource($user)]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(User $user)
@@ -54,5 +63,12 @@ class UserController extends BaseController
         $updatedUser = $this->userService->updateUser($request, $user);
 
         return ApiResponse::success(["user" => new UserResource($updatedUser)]);
+    }
+
+    public function editUserProfile(EditUserProfileRequest $request, User $user)
+    {
+        $this->userService->editProfile($request, $user);
+
+        return ApiResponse::success(['message' => "User profile edited successfully."]);
     }
 }
