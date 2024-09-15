@@ -6,9 +6,16 @@ use Illuminate\Support\Facades\Auth;
 
 class MenuService
 {
+    protected AuthService $authService;
+
+    public function __construct(AuthService $authService)
+    {
+        $this->authService = $authService;
+    }
+
     public function getMenuBasedOnRole()
     {
-        $isAdmin = Auth::user()->isAdmin();
+        $isAdmin = $this->authService->me()->isAdmin();
 
         $menu = $this->getDefaultMenu();
 
@@ -21,6 +28,8 @@ class MenuService
 
     private function getDefaultMenu()
     {
+        $userId = $this->authService->me()->id;
+
         return [
             [
                 'id' => 1,
@@ -78,7 +87,7 @@ class MenuService
             [
                 'id' => 11,
                 'name' => 'My profile',
-                'url' => '/my-profile'
+                'url' => "/user/{$userId}"
             ],
             [
                 'id' => 12,
