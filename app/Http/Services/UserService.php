@@ -6,6 +6,7 @@ use App\Http\Requests\EditUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use App\Http\Responses\ApiResponse;
 
@@ -62,6 +63,18 @@ class UserService
     {
         $validatedData = $request->validated();
 
-        $user->update($validatedData);
+        if (isset($validatedData['color_theme'])) {
+            $user->color_theme = $validatedData['color_theme'];
+        }
+
+        if (isset($validatedData['avatarUrl'])) {
+            if($user->avatar){
+                Storage::delete($user->avatar);
+            }
+
+            $user->avatar = Storage::url($validatedData['avatarUrl']);
+        }
+
+        $user->save();
     }
 }

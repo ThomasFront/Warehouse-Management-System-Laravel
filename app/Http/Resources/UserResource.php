@@ -21,7 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'role' => $this->role,
             'colorTheme' => $this->color_theme,
-            'createdAt' => $this->created_at
+            'createdAt' => $this->created_at,
+            'avatar' => $this->avatar
         ];
     }
 }

@@ -16,16 +16,6 @@ class AvatarService
 
     public function uploadAvatar(UploadAvatarRequest $request): string
     {
-        $user = $this->authService->me();
-
-        if($user->avatar){
-            Storage::delete($user->avatar);
-        }
-
-        $avatarPath = $request->file('avatar')->store('public/avatars');
-        $user->avatar = $avatarPath;
-        $user->save();
-
-        return Storage::url($avatarPath);
+        return $request->file('avatar')->store('public/avatars');
     }
 }

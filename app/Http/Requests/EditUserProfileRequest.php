@@ -30,6 +30,7 @@ class EditUserProfileRequest extends FormRequest
     {
         return [
             'color_theme' => ['sometimes', 'string', 'regex:/^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/'],
+            'avatarUrl' => ['sometimes', 'string']
         ];
     }
 }
