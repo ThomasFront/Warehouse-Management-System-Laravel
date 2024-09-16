@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckCurrentUser;
@@ -37,6 +38,13 @@ Route::group([
     Route::delete('{user}', [UserController::class, 'destroy'])->middleware('auth:api', CheckAdminRole::class);
     Route::patch('{user}', [UserController::class, 'update'])->middleware('auth:api', CheckAdminRole::class);
     Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware('auth:api', CheckCurrentUser::class);
+});
+
+Route::group([
+    'prefix' => 'messages'
+], function() {
+    Route::get('', [MessageController::class, 'index'])->middleware('auth:api');
+    Route::post('', [MessageController::class, 'store'])->middleware('auth:api');
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');
