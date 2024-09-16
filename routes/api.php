@@ -33,6 +33,7 @@ Route::group([
 ], function() {
     Route::get('', [UserController::class, 'index'])->middleware('auth:api');
     Route::get('{user}', [UserController::class, 'show'])->middleware('auth:api');
+    Route::post('avatar', [UserController::class, 'uploadAvatar'])->middleware('auth:api');
     Route::delete('{user}', [UserController::class, 'destroy'])->middleware('auth:api', CheckAdminRole::class);
     Route::patch('{user}', [UserController::class, 'update'])->middleware('auth:api', CheckAdminRole::class);
     Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware('auth:api', CheckCurrentUser::class);

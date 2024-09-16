@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EditUserProfileRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UploadAvatarRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Http\Responses\ApiResponse;
+use App\Http\Services\AvatarService;
 use App\Http\Services\UserService;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,10 +16,12 @@ use Illuminate\Http\Request;
 class UserController extends BaseController
 {
     protected UserService $userService;
+    protected AvatarService $avatarService;
 
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, AvatarService $avatarService)
     {
         $this->userService = $userService;
+        $this->avatarService = $avatarService;
     }
 
     /**
@@ -70,5 +74,14 @@ class UserController extends BaseController
         $this->userService->editProfile($request, $user);
 
         return ApiResponse::success(['message' => "User profile edited successfully."]);
+    }
+
+    public function uploadAvatar(UploadAvatarRequest $request)
+    {
+        $avatarUrl = $this->avatarService->uploadAvatar($request);
+
+        return ApiResponse::success([
+            'avatarUrl' => $avatarUrl
+        ]);
     }
 }
