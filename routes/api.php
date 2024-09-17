@@ -7,6 +7,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckCurrentUser;
+use App\Http\Middleware\CheckMessageOwner;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
@@ -45,6 +46,7 @@ Route::group([
 ], function() {
     Route::get('', [MessageController::class, 'index'])->middleware('auth:api');
     Route::post('', [MessageController::class, 'store'])->middleware('auth:api');
+    Route::delete('{message}', [MessageController::class, 'destroy'])->middleware('auth:api', CheckMessageOwner::class);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');

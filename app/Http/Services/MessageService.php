@@ -16,7 +16,7 @@ class MessageService
 
     public function getMessages()
     {
-        return Message::paginate(5);
+        return Message::orderBy("created_at", "desc")->paginate(5);
     }
 
     public function addMessage(CreateMessageRequest $request): Message
@@ -31,5 +31,10 @@ class MessageService
         $message->load('user');
 
         return $message;
+    }
+
+    public function deleteMessage(Message $message)
+    {
+        $message->delete();
     }
 }

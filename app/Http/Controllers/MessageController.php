@@ -7,6 +7,7 @@ use App\Http\Resources\MessageCollection;
 use App\Http\Resources\MessageResource;
 use App\Http\Responses\ApiResponse;
 use App\Http\Services\MessageService;
+use App\Models\Message;
 
 class MessageController extends Controller
 {
@@ -35,5 +36,15 @@ class MessageController extends Controller
         $message = $this->messageService->addMessage($request);
 
         return ApiResponse::success(["message" => new MessageResource($message)], 201);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Message $message)
+    {
+        $this->messageService->deleteMessage($message);
+
+        return ApiResponse::success(['message' => 'Message deleted successfully.']);
     }
 }
