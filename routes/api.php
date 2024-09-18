@@ -47,6 +47,7 @@ Route::group([
     Route::get('', [MessageController::class, 'index'])->middleware('auth:api');
     Route::post('', [MessageController::class, 'store'])->middleware('auth:api');
     Route::delete('{message}', [MessageController::class, 'destroy'])->middleware('auth:api', CheckMessageOwner::class);
+    Route::patch('{message}', [MessageController::class, 'update'])->middleware('auth:api', CheckMessageOwner::class);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');

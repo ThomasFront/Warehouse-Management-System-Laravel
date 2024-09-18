@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMessageRequest;
+use App\Http\Requests\UpdateMessageRequest;
 use App\Http\Resources\MessageCollection;
 use App\Http\Resources\MessageResource;
 use App\Http\Responses\ApiResponse;
@@ -36,6 +37,16 @@ class MessageController extends Controller
         $message = $this->messageService->addMessage($request);
 
         return ApiResponse::success(["message" => new MessageResource($message)], 201);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateMessageRequest $request, Message $message)
+    {
+        $updatedMessage = $this->messageService->updateMessage($request, $message);
+
+        return ApiResponse::success(["message" => new MessageResource($updatedMessage)]);
     }
 
     /**

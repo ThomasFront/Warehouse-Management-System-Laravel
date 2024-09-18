@@ -24,6 +24,6 @@ class CheckMessageOwner
             return $next($request);
         }
 
-        return ApiResponse::error(['message' => "You can't delete a message that isn't yours"], 403);
+        return ApiResponse::error(['message' => "You can't manage a message that isn't yours"], 403);
     }
 }

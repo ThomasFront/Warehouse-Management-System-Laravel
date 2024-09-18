@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Requests\CreateMessageRequest;
+use App\Http\Requests\UpdateMessageRequest;
 use App\Models\Message;
 
 class MessageService
@@ -29,6 +30,13 @@ class MessageService
         $message = Message::create($validatedData);
 
         $message->load('user');
+
+        return $message;
+    }
+
+    public function updateMessage(UpdateMessageRequest $request, Message $message): Message
+    {
+        $message->update($request->validated());
 
         return $message;
     }
