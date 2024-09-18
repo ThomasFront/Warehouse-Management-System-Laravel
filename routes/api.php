@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckCurrentUser;
@@ -11,7 +12,7 @@ use App\Http\Middleware\CheckMessageOwner;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
-    'prefix' => 'auth',
+    'prefix' => 'auth'
 ], function () {
     Route::post('register', [AuthController::class, 'register'])->middleware('auth:api', CheckAdminRole::class);
     Route::post('login', [AuthController::class, 'login']);
@@ -22,32 +23,42 @@ Route::group([
 
 Route::group([
     'prefix' => 'categories',
+    'middleware' => 'auth:api'
 ], function () {
-    Route::get('', [CategoryController::class, 'index'])->middleware('auth:api');
-    Route::post('', [CategoryController::class, 'store'])->middleware('auth:api');
-    Route::get('{category}', [CategoryController::class, 'show'])->middleware('auth:api');
-    Route::delete('{category}', [CategoryController::class, 'destroy'])->middleware('auth:api');
-    Route::patch('{category}', [CategoryController::class, 'update'])->middleware('auth:api');
+    Route::get('', [CategoryController::class, 'index']);
+    Route::post('', [CategoryController::class, 'store']);
+    Route::get('{category}', [CategoryController::class, 'show']);
+    Route::delete('{category}', [CategoryController::class, 'destroy']);
+    Route::patch('{category}', [CategoryController::class, 'update']);
 });
 
 Route::group([
-    'prefix' => 'users'
+    'prefix' => 'users',
+    'middleware' => 'auth:api'
 ], function() {
-    Route::get('', [UserController::class, 'index'])->middleware('auth:api');
-    Route::get('{user}', [UserController::class, 'show'])->middleware('auth:api');
-    Route::post('avatar', [UserController::class, 'uploadAvatar'])->middleware('auth:api');
-    Route::delete('{user}', [UserController::class, 'destroy'])->middleware('auth:api', CheckAdminRole::class);
-    Route::patch('{user}', [UserController::class, 'update'])->middleware('auth:api', CheckAdminRole::class);
-    Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware('auth:api', CheckCurrentUser::class);
+    Route::get('', [UserController::class, 'index']);
+    Route::get('{user}', [UserController::class, 'show']);
+    Route::post('avatar', [UserController::class, 'uploadAvatar']);
+    Route::delete('{user}', [UserController::class, 'destroy'])->middleware( CheckAdminRole::class);
+    Route::patch('{user}', [UserController::class, 'update'])->middleware( CheckAdminRole::class);
+    Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware( CheckCurrentUser::class);
 });
 
 Route::group([
-    'prefix' => 'messages'
+    'prefix' => 'messages',
+    'middleware' => 'auth:api'
 ], function() {
-    Route::get('', [MessageController::class, 'index'])->middleware('auth:api');
-    Route::post('', [MessageController::class, 'store'])->middleware('auth:api');
-    Route::delete('{message}', [MessageController::class, 'destroy'])->middleware('auth:api', CheckMessageOwner::class);
-    Route::patch('{message}', [MessageController::class, 'update'])->middleware('auth:api', CheckMessageOwner::class);
+    Route::get('', [MessageController::class, 'index']);
+    Route::post('', [MessageController::class, 'store']);
+    Route::delete('{message}', [MessageController::class, 'destroy'])->middleware(CheckMessageOwner::class);
+    Route::patch('{message}', [MessageController::class, 'update'])->middleware(CheckMessageOwner::class);
+});
+
+Route::group([
+    'prefix' => 'products',
+    'middleware' => 'auth:api'
+], function() {
+   Route::post('image', [ProductController::class, 'uploadProductImage']);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');

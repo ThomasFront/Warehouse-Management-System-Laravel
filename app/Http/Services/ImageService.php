@@ -8,6 +8,11 @@ class ImageService
 {
     public function uploadAvatar(UploadImageRequest $request): string
     {
-        return $request->file('avatar')->store('public/avatars');
+        return $request->file('image')->store('public/avatars');
+    }
+
+    public function uploadProductImage(UploadImageRequest $request): string
+    {
+        return $request->file('image')->store('public/products');
     }
 }
