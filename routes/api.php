@@ -27,6 +27,7 @@ Route::group([
 ], function () {
     Route::get('', [CategoryController::class, 'index']);
     Route::post('', [CategoryController::class, 'store']);
+    Route::get('/dropdown', [CategoryController::class, 'dropdownProvider']);
     Route::get('{category}', [CategoryController::class, 'show']);
     Route::delete('{category}', [CategoryController::class, 'destroy']);
     Route::patch('{category}', [CategoryController::class, 'update']);

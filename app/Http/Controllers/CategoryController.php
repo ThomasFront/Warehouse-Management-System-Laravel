@@ -76,4 +76,10 @@ class CategoryController extends BaseController
 
         return ApiResponse::success(['message' => 'Category deleted successfully.']);
     }
+
+    public function dropdownProvider()
+    {
+        $dropdownProvider = $this->getDropdownProvider(new Category);
+        return ApiResponse::success(['dropdown' => $dropdownProvider]);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class BaseController extends Controller
@@ -16,5 +17,15 @@ class BaseController extends Controller
             'filterValue' => $request->input('filterValue'),
             'filterOperator' => $request->input('filterOperator'),
         ];
+    }
+
+    protected function getDropdownProvider(Model $model)
+    {
+        return $model::all()->map(function($item){
+           return [
+               'label' => $item->name,
+               'value' => $item->id
+           ];
+        });
     }
 }
