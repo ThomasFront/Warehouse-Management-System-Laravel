@@ -36,7 +36,7 @@ class ProductController extends Controller
         $productImageUrl = $this->imageService->uploadProductImage($request);
 
         return ApiResponse::success([
-            'productImageUrl' => $productImageUrl
+            'image' => $productImageUrl
         ]);
     }
 }

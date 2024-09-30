@@ -81,7 +81,7 @@ class UserController extends BaseController
         $avatarUrl = $this->imageService->uploadAvatar($request);
 
         return ApiResponse::success([
-            'avatarUrl' => $avatarUrl
+            'image' => $avatarUrl
         ]);
     }
 }
