@@ -60,6 +60,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function() {
    Route::post('image', [ProductController::class, 'uploadProductImage']);
+   Route::post('', [ProductController::class, 'store']);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');
