@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UploadImageRequest;
+use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
 use App\Http\Responses\ApiResponse;
 use App\Http\Services\ImageService;
 use App\Http\Services\ProductService;
+use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     protected ImageService $imageService;
     protected ProductService $productService;
@@ -22,9 +24,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $params = $this->getPaginationAndFilterParams($request);
+
+        $products = $this->productService->getProducts(
+            $params['pageSize'],
+            $params['sortField'],
+            $params['sortOrder'],
+            $params['filterField'],
+            $params['filterValue'],
+            $params['filterOperator']
+        );
+
+        return response()->json(new ProductCollection($products));
     }
 
     /**

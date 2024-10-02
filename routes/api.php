@@ -36,19 +36,19 @@ Route::group([
 Route::group([
     'prefix' => 'users',
     'middleware' => 'auth:api'
-], function() {
+], function () {
     Route::get('', [UserController::class, 'index']);
     Route::get('{user}', [UserController::class, 'show']);
     Route::post('avatar', [UserController::class, 'uploadAvatar']);
-    Route::delete('{user}', [UserController::class, 'destroy'])->middleware( CheckAdminRole::class);
-    Route::patch('{user}', [UserController::class, 'update'])->middleware( CheckAdminRole::class);
-    Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware( CheckCurrentUser::class);
+    Route::delete('{user}', [UserController::class, 'destroy'])->middleware(CheckAdminRole::class);
+    Route::patch('{user}', [UserController::class, 'update'])->middleware(CheckAdminRole::class);
+    Route::patch('{user}/profile', [UserController::class, 'editUserProfile'])->middleware(CheckCurrentUser::class);
 });
 
 Route::group([
     'prefix' => 'messages',
     'middleware' => 'auth:api'
-], function() {
+], function () {
     Route::get('', [MessageController::class, 'index']);
     Route::post('', [MessageController::class, 'store']);
     Route::delete('{message}', [MessageController::class, 'destroy'])->middleware(CheckMessageOwner::class);
@@ -58,9 +58,10 @@ Route::group([
 Route::group([
     'prefix' => 'products',
     'middleware' => 'auth:api'
-], function() {
-   Route::post('image', [ProductController::class, 'uploadProductImage']);
-   Route::post('', [ProductController::class, 'store']);
+], function () {
+    Route::get('', [ProductController::class, 'index']);
+    Route::post('image', [ProductController::class, 'uploadProductImage']);
+    Route::post('', [ProductController::class, 'store']);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');
