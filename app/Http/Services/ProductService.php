@@ -3,6 +3,7 @@
 namespace App\Http\Services;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Support\Str;
 
@@ -41,5 +42,12 @@ class ProductService
     public function deleteProduct(Product $product)
     {
         $product->delete();
+    }
+
+    public function updateProduct(UpdateProductRequest $request, Product $product)
+    {
+        $product->update($request->validated());
+
+        return $product;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UploadImageRequest;
 use App\Http\Resources\ProductCollection;
 use App\Http\Resources\ProductResource;
@@ -69,5 +70,15 @@ class ProductController extends BaseController
         $this->productService->deleteProduct($product);
 
         return ApiResponse::success(['message' => 'Product deleted successfully.']);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $updatedProduct = $this->productService->updateProduct($request, $product);
+
+        return ApiResponse::success(["user" => new ProductResource($updatedProduct)]);
     }
 }

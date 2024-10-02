@@ -46,7 +46,7 @@ class MessageController extends Controller
     {
         $updatedMessage = $this->messageService->updateMessage($request, $message);
 
-        return ApiResponse::success(["message" => new MessageResource($updatedMessage)]);
+        return ApiResponse::success(["product" => new MessageResource($updatedMessage)]);
     }
 
     /**
