@@ -9,6 +9,7 @@ use App\Http\Resources\ProductResource;
 use App\Http\Responses\ApiResponse;
 use App\Http\Services\ImageService;
 use App\Http\Services\ProductService;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends BaseController
@@ -21,6 +22,7 @@ class ProductController extends BaseController
         $this->imageService = $imageService;
         $this->productService = $productService;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -57,5 +59,15 @@ class ProductController extends BaseController
         return ApiResponse::success([
             'image' => $productImageUrl
         ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Product $product)
+    {
+        $this->productService->deleteProduct($product);
+
+        return ApiResponse::success(['message' => 'Product deleted successfully.']);
     }
 }

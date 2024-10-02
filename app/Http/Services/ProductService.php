@@ -37,4 +37,9 @@ class ProductService
 
         return $query->paginate($pageSize);
     }
+
+    public function deleteProduct(Product $product)
+    {
+        $product->delete();
+    }
 }

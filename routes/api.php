@@ -62,6 +62,7 @@ Route::group([
     Route::get('', [ProductController::class, 'index']);
     Route::post('image', [ProductController::class, 'uploadProductImage']);
     Route::post('', [ProductController::class, 'store']);
+    Route::delete('{product}', [ProductController::class, 'destroy']);
 });
 
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');
