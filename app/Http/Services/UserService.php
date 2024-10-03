@@ -77,4 +77,9 @@ class UserService
 
         $user->save();
     }
+
+    public function countUsers()
+    {
+        return User::count();
+    }
 }

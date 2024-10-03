@@ -50,4 +50,9 @@ class CategoryService
 
         return ApiResponse::success(['message' => 'Category successfully deleted']);
     }
+
+    public function countCategories()
+    {
+        return Category::count();
+    }
 }

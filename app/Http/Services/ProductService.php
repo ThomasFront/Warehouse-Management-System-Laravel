@@ -50,4 +50,9 @@ class ProductService
 
         return $product;
     }
+
+    public function countProducts()
+    {
+        return Product::count();
+    }
 }

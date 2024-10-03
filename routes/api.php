@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
@@ -66,4 +67,5 @@ Route::group([
     Route::patch('{product}', [ProductController::class, 'update']);
 });
 
+Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth:api');
 Route::get('menu', [MenuController::class, 'index'])->middleware('auth:api');
