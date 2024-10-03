@@ -72,9 +72,7 @@ class CategoryController extends BaseController
      */
     public function destroy(Category $category)
     {
-        $this->categoryService->deleteCategory($category);
-
-        return ApiResponse::success(['message' => 'Category deleted successfully.']);
+        return $this->categoryService->deleteCategory($category);
     }
 
     public function dropdownProvider()

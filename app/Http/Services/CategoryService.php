@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Http\Responses\ApiResponse;
 use App\Models\Category;
 
 class CategoryService
@@ -37,6 +38,16 @@ class CategoryService
 
     public function deleteCategory(Category $category)
     {
+        $productsWithThisCategoryExists = $category->products->count() > 0;
+
+        if ($productsWithThisCategoryExists) {
+            return response()->json([
+                'message' => 'You cannot delete a category that is assigned to a product'
+            ], 400);
+        }
+
         $category->delete();
+
+        return ApiResponse::success(['message' => 'Category successfully deleted']);
     }
 }
