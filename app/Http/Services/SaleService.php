@@ -7,9 +7,17 @@ use App\Http\Resources\SaleResource;
 use App\Http\Responses\ApiResponse;
 use App\Models\Product;
 use App\Models\Sale;
+use Illuminate\Support\Str;
 
 class SaleService
 {
+    protected FilterService $filterService;
+
+    public function __construct(FilterService $filterService)
+    {
+        $this->filterService = $filterService;
+    }
+
     public function sell(CreateSaleRequest $request)
     {
         $validatedData = $request->validated();
@@ -32,5 +40,18 @@ class SaleService
         ]);
 
         return ApiResponse::success(['sale' => new SaleResource($sale)], 201);
+    }
+
+    public function getSales($pageSize, $sortField, $sortOrder, $filterField, $filterValue, $filterOperator)
+    {
+        $sortField = Str::snake($sortField);
+        $filterField = Str::snake($filterField);
+
+        $query = Sale::orderBy('updated_at', 'desc')
+            ->orderBy($sortField, $sortOrder);
+
+        $this->filterService->applyFilters($query, $filterField, $filterOperator, $filterValue);
+
+        return $query->paginate($pageSize);
     }
 }

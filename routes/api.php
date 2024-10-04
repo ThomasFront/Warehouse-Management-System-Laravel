@@ -74,6 +74,7 @@ Route::group([
     'prefix' => 'sales',
     'middleware' => 'auth:api'
 ], function () {
+    Route::get('', [SaleController::class, 'index']);
     Route::post('', [SaleController::class, 'store']);
 });
 
