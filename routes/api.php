@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckCurrentUser;
@@ -67,6 +68,13 @@ Route::group([
     Route::post('', [ProductController::class, 'store']);
     Route::delete('{product}', [ProductController::class, 'destroy']);
     Route::patch('{product}', [ProductController::class, 'update']);
+});
+
+Route::group([
+    'prefix' => 'sales',
+    'middleware' => 'auth:api'
+], function () {
+    Route::post('', [SaleController::class, 'store']);
 });
 
 Route::get('dashboard', [DashboardController::class, 'index'])->middleware('auth:api');
