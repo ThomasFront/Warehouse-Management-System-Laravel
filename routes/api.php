@@ -61,6 +61,8 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::get('', [ProductController::class, 'index']);
+    Route::get('/dropdown', [ProductController::class, 'dropdownProvider']);
+    Route::get('{product}', [ProductController::class, 'show']);
     Route::post('image', [ProductController::class, 'uploadProductImage']);
     Route::post('', [ProductController::class, 'store']);
     Route::delete('{product}', [ProductController::class, 'destroy']);

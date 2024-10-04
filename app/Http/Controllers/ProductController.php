@@ -44,6 +44,14 @@ class ProductController extends BaseController
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        return ApiResponse::success(['product' => new ProductResource($product)]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(CreateProductRequest $request)
@@ -80,5 +88,11 @@ class ProductController extends BaseController
         $updatedProduct = $this->productService->updateProduct($request, $product);
 
         return ApiResponse::success(["user" => new ProductResource($updatedProduct)]);
+    }
+
+    public function dropdownProvider()
+    {
+        $dropdownProvider = $this->getDropdownProvider(new Product);
+        return ApiResponse::success(['dropdown' => $dropdownProvider]);
     }
 }
