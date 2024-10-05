@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Sale;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Response;
 
 class SaleService
 {
@@ -71,5 +72,23 @@ class SaleService
             ->get();
 
         return $sales;
+    }
+
+    public function exportToCsvFormat()
+    {
+        $data = Sale::orderBy('updated_at', 'desc')->get();
+
+        $csvHeader = ['ID', 'Product', 'Quantity', 'Sales price', 'Total price', 'Created at'];
+
+        $csvContent = implode(',', $csvHeader) . "\n";
+
+        foreach ($data as $row){
+            $csvContent = $csvContent . "{$row->id},{$row->product->name},{$row->quantity},{$row->product->price},{$row->total_price},{$row->created_at}\n";
+        }
+
+        return Response::make($csvContent, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="sales_export.csv"',
+        ]);
     }
 }

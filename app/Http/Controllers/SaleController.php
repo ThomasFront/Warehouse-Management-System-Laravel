@@ -42,4 +42,9 @@ class SaleController extends BaseController
     {
         return $this->saleService->sell($request);
     }
+
+    public function exportCsv()
+    {
+        return $this->saleService->exportToCsvFormat();
+    }
 }

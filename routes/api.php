@@ -75,6 +75,7 @@ Route::group([
     'middleware' => 'auth:api'
 ], function () {
     Route::get('', [SaleController::class, 'index']);
+    Route::get('/export', [SaleController::class, 'exportCsv']);
     Route::post('', [SaleController::class, 'store']);
 });
 
