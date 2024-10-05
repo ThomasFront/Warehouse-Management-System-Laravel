@@ -28,12 +28,14 @@ class DashboardService
         $productCount = $this->productService->countProducts();
         $categoryCount = $this->categoryService->countCategories();
         $totalPrice = $this->saleService->getTotalPrice();
+        $monthlySales = $this->saleService->getMonthlySales();
 
         return [
             'userCount' => $userCount,
             'productCount' => $productCount,
             'categoryCount' => $categoryCount,
-            'totalPrice' => $totalPrice
+            'totalPrice' => $totalPrice,
+            'monthlySales' => $monthlySales,
         ];
     }
 }

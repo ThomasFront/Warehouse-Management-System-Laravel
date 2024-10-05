@@ -7,6 +7,7 @@ use App\Http\Resources\SaleResource;
 use App\Http\Responses\ApiResponse;
 use App\Models\Product;
 use App\Models\Sale;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 class SaleService
@@ -58,5 +59,23 @@ class SaleService
     public function getTotalPrice()
     {
         return Sale::sum('total_price');
+    }
+
+    public function getMonthlySales()
+    {
+        $currentYear = Carbon::now()->year;
+
+        $monthlySales = array_fill(0, 12, 0);
+
+        $sales = Sale::selectRaw('MONTH(created_at) as month, SUM(total_price) as total_price')
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('month')
+            ->get();
+
+        foreach ($sales as $sale){
+            $monthlySales[$sale->month - 1] = (float) $sale->total_price;
+        }
+
+        return $monthlySales;
     }
 }
