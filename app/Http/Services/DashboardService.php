@@ -2,6 +2,8 @@
 
 namespace App\Http\Services;
 
+use App\Http\Resources\MonthlySalesCollection;
+
 class DashboardService
 {
     protected UserService $userService;
@@ -22,7 +24,7 @@ class DashboardService
         $this->categoryService = $categoryService;
         $this->saleService = $saleService;
     }
-    public function getDashboardData()
+    public function getDashboardData(): array
     {
         $userCount = $this->userService->countUsers();
         $productCount = $this->productService->countProducts();
@@ -35,7 +37,7 @@ class DashboardService
             'productCount' => $productCount,
             'categoryCount' => $categoryCount,
             'totalPrice' => $totalPrice,
-            'monthlySales' => $monthlySales,
+            'monthlySales' => new MonthlySalesCollection($monthlySales)
         ];
     }
 }
