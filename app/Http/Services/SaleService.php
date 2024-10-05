@@ -54,4 +54,9 @@ class SaleService
 
         return $query->paginate($pageSize);
     }
+
+    public function getTotalPrice()
+    {
+        return Sale::sum('total_price');
+    }
 }
