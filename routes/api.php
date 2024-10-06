@@ -63,6 +63,7 @@ Route::group([
 ], function () {
     Route::get('', [ProductController::class, 'index']);
     Route::get('/dropdown', [ProductController::class, 'dropdownProvider']);
+    Route::get('/export', [ProductController::class, 'exportCsv']);
     Route::get('{product}', [ProductController::class, 'show']);
     Route::post('image', [ProductController::class, 'uploadProductImage']);
     Route::post('', [ProductController::class, 'store']);
