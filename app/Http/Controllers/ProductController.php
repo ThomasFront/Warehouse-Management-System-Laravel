@@ -96,8 +96,8 @@ class ProductController extends BaseController
         return ApiResponse::success(['dropdown' => $dropdownProvider]);
     }
 
-    public function exportCsv()
+    public function exportCsv(Request $request)
     {
-        return $this->productService->exportToCsvFormat();
+        return $this->productService->exportToCsvFormat($request);
     }
 }

@@ -5,8 +5,10 @@ namespace App\Http\Services;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\App;
 
 class ProductService
 {
@@ -57,11 +59,21 @@ class ProductService
         return Product::count();
     }
 
-    public function exportToCsvFormat()
+    public function exportToCsvFormat(Request $request)
     {
+        $locale = $request->header('Accept-Language', 'en');
+        App::setLocale($locale);
+
         $data = Product::orderBy('updated_at', 'desc')->get();
 
-        $csvHeader = ['ID', 'Name', 'Category', 'Price', 'Stock', 'Description'];
+        $csvHeader = [
+            __('csv.ID'),
+            __('csv.Name'),
+            __('csv.Category'),
+            __('csv.Price'),
+            __('csv.Stock'),
+            __('csv.Description')
+        ];
 
         $csvContent = implode(',', $csvHeader) . "\n";
 

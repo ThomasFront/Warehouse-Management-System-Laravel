@@ -8,8 +8,10 @@ use App\Http\Responses\ApiResponse;
 use App\Models\Product;
 use App\Models\Sale;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\App;
 
 class SaleService
 {
@@ -74,11 +76,21 @@ class SaleService
         return $sales;
     }
 
-    public function exportToCsvFormat()
+    public function exportToCsvFormat(Request $request)
     {
+        $locale = $request->header('Accept-Language', 'en');
+        App::setLocale($locale);
+
         $data = Sale::orderBy('updated_at', 'desc')->get();
 
-        $csvHeader = ['ID', 'Product', 'Quantity', 'Sales price', 'Total price', 'Created at'];
+        $csvHeader = [
+            __('csv.ID'),
+            __('csv.Product'),
+            __('csv.Quantity'),
+            __('csv.Sales price'),
+            __('csv.Total price'),
+            __('csv.Created at')
+        ];
 
         $csvContent = implode(',', $csvHeader) . "\n";
 
