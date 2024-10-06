@@ -3,13 +3,13 @@
 namespace App\Http\Services;
 
 use App\Http\Resources\MonthlySalesCollection;
+use App\Http\Resources\TopProductsCollection;
 
 class DashboardService
 {
     protected UserService $userService;
     protected ProductService $productService;
     protected CategoryService $categoryService;
-
     protected SaleService $saleService;
 
     public function __construct(
@@ -31,13 +31,15 @@ class DashboardService
         $categoryCount = $this->categoryService->countCategories();
         $totalPrice = $this->saleService->getTotalPrice();
         $monthlySales = $this->saleService->getMonthlySales();
+        $topProducts = $this->saleService->getTopProducts();
 
         return [
             'userCount' => $userCount,
             'productCount' => $productCount,
             'categoryCount' => $categoryCount,
             'totalPrice' => $totalPrice,
-            'monthlySales' => new MonthlySalesCollection($monthlySales)
+            'monthlySales' => new MonthlySalesCollection($monthlySales),
+            'topProducts' => new TopProductsCollection($topProducts)
         ];
     }
 }

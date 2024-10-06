@@ -103,4 +103,15 @@ class SaleService
             'Content-Disposition' => 'attachment; filename="sales_export.csv"',
         ]);
     }
+
+    public function getTopProducts()
+    {
+        $topProducts = Sale::select('product_id')
+            ->selectRaw('SUM(quantity) as total_quantity')
+            ->groupBy('product_id')
+            ->orderByDesc('total_quantity')
+            ->get();
+
+        return $topProducts;
+    }
 }
