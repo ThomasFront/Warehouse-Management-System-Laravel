@@ -111,6 +111,7 @@ class SaleService
         $topProducts = Sale::select('product_id')
             ->selectRaw('SUM(quantity) as total_quantity')
             ->whereYear('created_at', $currentYear)
+            ->limit(10)
             ->groupBy('product_id')
             ->orderByDesc('total_quantity')
             ->get();
