@@ -106,8 +106,11 @@ class SaleService
 
     public function getTopProducts()
     {
+        $currentYear = Carbon::now()->year;
+
         $topProducts = Sale::select('product_id')
             ->selectRaw('SUM(quantity) as total_quantity')
+            ->whereYear('created_at', $currentYear)
             ->groupBy('product_id')
             ->orderByDesc('total_quantity')
             ->get();
