@@ -2,22 +2,35 @@
 
 namespace App\Http\Services;
 
+use App\Http\Requests\RegisterUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthService
 {
 
-    public function register(array $data)
+    public function register(RegisterUserRequest $request)
     {
-        User::create([
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name'],
-            'email' => $data['email'],
-            'role' => $data['role'],
-            'password' => Hash::make($data['password']),
+        $validatedData = $request->validated();
+
+        $user = User::create([
+            'first_name' => $validatedData['first_name'],
+            'last_name' => $validatedData['last_name'],
+            'email' => $validatedData['email'],
+            'role' => $validatedData['role'],
+            'password' => Hash::make($validatedData['password']),
         ]);
+
+        if (isset($validatedData['avatarUrl'])) {
+            if ($user->avatar) {
+                Storage::delete($user->avatar);
+            }
+
+            $user->avatar = Storage::url($validatedData['avatarUrl']);
+            $user->save();
+        }
     }
 
     public function login(array $credentials): ?array

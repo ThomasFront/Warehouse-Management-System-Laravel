@@ -19,8 +19,10 @@ class CheckMessageOwner
     {
         $messageOwnerId = $request->route('message')['user_id'];
         $currentUserId = Auth::id();
+        $isAdmin = Auth::check() && Auth::user()->isAdmin();
+        $canManageMessage = $messageOwnerId === $currentUserId || $isAdmin;
 
-        if($messageOwnerId === $currentUserId){
+        if($canManageMessage){
             return $next($request);
         }
 

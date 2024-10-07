@@ -18,18 +18,18 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'Thomas',
             'last_name' => 'Kanciano',
-            'email' => 'thomas.kanciano@example.com',
+            'email' => 'thomas.user@example.com',
             'role' => 'admin',
-            'password' => bcrypt('thomaskanciano'),
+            'password' => bcrypt('thomas'),
             'created_at' => Carbon::now()->setDate(2024, 9, 15)->setTime(12, 0)
         ]);
 
         User::create([
-            'first_name' => 'Mark',
-            'last_name' => 'Satechi',
-            'email' => 'mark.satechi@example.com',
+            'first_name' => 'George',
+            'last_name' => 'Dutch',
+            'email' => 'george.dutch@example.com',
             'role' => 'user',
-            'password' => bcrypt('marksatechi'),
+            'password' => bcrypt('george'),
             'created_at' => Carbon::now()->setDate(2024, 9, 20)->setTime(15, 30)
         ]);
     }

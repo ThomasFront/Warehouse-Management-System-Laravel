@@ -18,8 +18,10 @@ class CheckCurrentUser
     public function handle(Request $request, Closure $next): Response
     {
         $userId = $request->route('user')['id'];
+        $isAdmin = Auth::check() && Auth::user()->isAdmin();
+        $canManageUserProfile = $isAdmin || (Auth::check() && Auth::id() === (int)$userId);
 
-        if (Auth::check() && Auth::id() !== (int)$userId) {
+        if (!$canManageUserProfile) {
             return ApiResponse::error(['message' => 'Unauthorized'], 403);
         }
 
