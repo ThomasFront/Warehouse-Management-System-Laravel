@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'Thomas',
             'last_name' => 'Kanciano',
-            'email' => 'thomas.user@example.com',
+            'email' => 'thomas.admin@example.com',
             'role' => 'admin',
             'password' => bcrypt('thomas'),
             'created_at' => Carbon::now()->setDate(2024, 9, 15)->setTime(12, 0)
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
         User::create([
             'first_name' => 'George',
             'last_name' => 'Dutch',
-            'email' => 'george.dutch@example.com',
+            'email' => 'george.user@example.com',
             'role' => 'user',
             'password' => bcrypt('george'),
             'created_at' => Carbon::now()->setDate(2024, 9, 20)->setTime(15, 30)
