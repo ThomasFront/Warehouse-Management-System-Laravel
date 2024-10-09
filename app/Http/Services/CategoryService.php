@@ -10,10 +10,12 @@ use App\Models\Category;
 class CategoryService
 {
     protected FilterService $filterService;
+
     public function __construct(FilterService $filterService)
     {
         $this->filterService = $filterService;
     }
+
     public function getCategories($pageSize, $sortField, $sortOrder, $filterField, $filterValue, $filterOperator)
     {
         $query = Category::orderBy('updated_at', 'desc')

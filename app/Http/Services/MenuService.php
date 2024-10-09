@@ -2,8 +2,6 @@
 
 namespace App\Http\Services;
 
-use Illuminate\Support\Facades\Auth;
-
 class MenuService
 {
     protected AuthService $authService;
