@@ -33,8 +33,6 @@ Administrators have enhanced permissions, including:
 
 ## Some screenshots: 
 
-## Installation
-
 ![Login page](https://github.com/user-attachments/assets/4ecc6254-6c00-4fde-90c8-f4cc6c55efb3)
 ![Dashboard page](https://github.com/user-attachments/assets/ec1d4b20-8f02-45b6-b63f-1f5888209324)
 ![Products page](https://github.com/user-attachments/assets/a1ec9193-bcea-41a2-8ee8-97d2f1eef482)
@@ -45,50 +43,7 @@ Administrators have enhanced permissions, including:
 ![User list page](https://github.com/user-attachments/assets/452b9c5b-1f21-4740-aa5b-f8c2a0c27695)
 
 
-**Frontend:**
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/ThomasFront/Warehouse-Management-System-React.git
-   ```
-
-2. Navigate to the directory:
-   ```bash
-   cd Warehouse-Management-System-React
-   ```
-
-3. Install frontend dependencies using **npm**:
-   ```bash
-   npm install
-   ```
-
-    or using **yarn**:
-    ```bash
-    yarn install
-    ```
-
-4. Create a **.env.local** file in the root directory with the following values::
-   ```bash
-   VITE_BACKEND_API_URL=http://127.0.0.1:8000/api/
-   VITE_BACKEND_LARAVEL=http://127.0.0.1:8000
-   ```
-
-5. Start the React development server using npm:
-   ```bash
-   npm run dev
-   ```
-
-    or using **yarn**:
-    ```bash
-    yarn dev
-    ```
-
-6. Open your browser and navigate to:
-   ```bash
-   http://localhost:5173/
-   ```
-
-
+## Installation
 
 **Backend:**
 
@@ -149,7 +104,7 @@ Administrators have enhanced permissions, including:
    php artisan serve
    ```
 
-12. Access the frontend at **http://localhost:5173/** and log in to your account:
+12. Access the frontend at **http://localhost:5173/** and log in to your account
 
   Example login credentials:
 
@@ -164,3 +119,47 @@ Administrators have enhanced permissions, including:
   Email: george.user@example.com
   Password: george
   ```
+
+
+**Frontend:**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ThomasFront/Warehouse-Management-System-React.git
+   ```
+
+2. Navigate to the directory:
+   ```bash
+   cd Warehouse-Management-System-React
+   ```
+
+3. Install frontend dependencies using **npm**:
+   ```bash
+   npm install
+   ```
+
+    or using **yarn**:
+    ```bash
+    yarn install
+    ```
+
+4. Create a **.env.local** file in the root directory with the following values::
+   ```bash
+   VITE_BACKEND_API_URL=http://127.0.0.1:8000/api/
+   VITE_BACKEND_LARAVEL=http://127.0.0.1:8000
+   ```
+
+5. Start the React development server using npm:
+   ```bash
+   npm run dev
+   ```
+
+    or using **yarn**:
+    ```bash
+    yarn dev
+    ```
+
+6. Open your browser and navigate to:
+   ```bash
+   http://localhost:5173/
+   ```
