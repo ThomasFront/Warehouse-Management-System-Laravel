@@ -104,23 +104,6 @@ Administrators have enhanced permissions, including:
    php artisan serve
    ```
 
-12. Access the frontend at **http://localhost:5173/** and log in to your account
-
-  Example login credentials:
-
-  For **ADMIN**:
-  ```bash
-  Email: thomas.admin@example.com
-  Password: thomas
-  ```
-
-  For **USER**:
-  ```bash
-  Email: george.user@example.com
-  Password: george
-  ```
-
-
 **Frontend:**
 
 1. Clone the repository:
@@ -163,3 +146,19 @@ Administrators have enhanced permissions, including:
    ```bash
    http://localhost:5173/
    ```
+
+7. Access the frontend at **http://localhost:5173/** and log in to your account
+
+  Example login credentials:
+
+  For **ADMIN**:
+  ```bash
+  Email: thomas.admin@example.com
+  Password: thomas
+  ```
+
+  For **USER**:
+  ```bash
+  Email: george.user@example.com
+  Password: george
+  ```
