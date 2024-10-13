@@ -1,66 +1,166 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Warehouse Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Warehouse Management System** is a comprehensive application designed for managing warehouse operations, built using **React** for the frontend and **Laravel** for the backend. The application provides an intuitive user interface and is available in both Polish and English.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Dashboard**: Displays key information such as the number of users, products, categories, total sales, and includes useful charts related to sales and top products.
+  
+- **Products**: Allows users to view a list of products with options to export data to CSV, edit, delete, and add new products along with images.
+  
+- **Categories**: Provides management of product categories through options to edit, delete, and add new categories.
+  
+- **Sales**: Enables adding sales records for products and viewing a list of all transactions with the ability to export to CSV.
+  
+- **Profile**: Users can view their profile data and edit their profile picture and theme.
+  
+- **Messages**: Users can add messages with priority settings and edit or delete existing messages.
+  
+- **Users**: A list of all users is available, allowing everyone to view profiles, while administrators can add new users, edit, and delete other user accounts.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Administrator Privileges
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Administrators have enhanced permissions, including:
+- Managing user accounts (adding, editing, and deleting users).
+- Editing and deleting messages.
+- Accessing advanced system features.
 
-## Learning Laravel
+## Technologies Used
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Frontend**: React, TypeScript, Material UI, React Hook Form, Yup, Date-fns, Framer Motion, Vitest, React Testing Library 
+- **Backend**: Laravel
+- **Database**: MySQL
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Some screenshots: 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation
 
-## Laravel Sponsors
+![Login page](https://github.com/user-attachments/assets/4ecc6254-6c00-4fde-90c8-f4cc6c55efb3)
+![Dashboard page](https://github.com/user-attachments/assets/ec1d4b20-8f02-45b6-b63f-1f5888209324)
+![Products page](https://github.com/user-attachments/assets/a1ec9193-bcea-41a2-8ee8-97d2f1eef482)
+![Add product page](https://github.com/user-attachments/assets/0cd8d67a-5cd6-4bb7-9405-84d6f13421b3)
+![Sales history page](https://github.com/user-attachments/assets/0d2e6d37-b907-4901-ad9d-2677462911db)
+![Message list page](https://github.com/user-attachments/assets/9d1f10b9-0674-4e3e-a1a4-8f1b86772b43)
+![Edit user profile page](https://github.com/user-attachments/assets/31d8df89-019c-48ea-83cf-ec928c793f14)
+![User list page](https://github.com/user-attachments/assets/452b9c5b-1f21-4740-aa5b-f8c2a0c27695)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
+**Frontend:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ThomasFront/Warehouse-Management-System-React.git
+   ```
 
-## Contributing
+2. Navigate to the directory:
+   ```bash
+   cd Warehouse-Management-System-React
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. Install frontend dependencies using **npm**:
+   ```bash
+   npm install
+   ```
 
-## Code of Conduct
+    or using **yarn**:
+    ```bash
+    yarn install
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+4. Create a **.env.local** file in the root directory with the following values::
+   ```bash
+   VITE_BACKEND_API_URL=http://127.0.0.1:8000/api/
+   VITE_BACKEND_LARAVEL=http://127.0.0.1:8000
+   ```
 
-## Security Vulnerabilities
+5. Start the React development server using npm:
+   ```bash
+   npm run dev
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    or using **yarn**:
+    ```bash
+    yarn dev
+    ```
 
-## License
+6. Open your browser and navigate to:
+   ```bash
+   http://localhost:5173/
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+**Backend:**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/ThomasFront/Warehouse-Management-System-Laravel.git
+   ```
+
+2. Navigate to the directory:
+   ```bash
+   cd Warehouse-Management-System-Laravel
+   ```
+
+3. Install backend dependencies:
+   ```bash
+   composer install
+   ```
+
+4. Create the .env configuration file:
+   ```bash
+   cp .env.example .env
+   ```
+
+5. Set the appropriate database values in the **.env** file:
+   ```bash
+   DB_DATABASE=wms
+   DB_USERNAME=user
+   DB_PASSWORD=password
+   ```
+
+6. Generate an application key:
+   ```bash
+   php artisan key:generate
+   ```
+
+7. Generate the JWT secret:
+   ```bash
+   php artisan jwt:secret
+   ```
+
+8. Start the application using Docker:
+   ```bash
+   docker-compose up -d
+   ```
+
+9. Run the database migrations:
+   ```bash
+   php artisan migrate
+   ```
+
+10. Seed the database with initial data:
+   ```bash
+   php artisan db:seed
+   ```
+
+11. Start the development server:
+   ```bash
+   php artisan serve
+   ```
+
+12. Access the frontend at **http://localhost:5173/** and log in to your account:
+
+  Example login credentials:
+
+  For **ADMIN**:
+  ```bash
+  Email: thomas.admin@example.com
+  Password: thomas
+  ```
+
+  For **USER**:
+  ```bash
+  Email: george.user@example.com
+  Password: george
+  ```
